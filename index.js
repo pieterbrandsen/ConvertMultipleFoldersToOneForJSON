@@ -1,11 +1,12 @@
 // Importing libraries
+require('dotenv').config();
 const fs = require("fs");
 const _ = require("lodash");
 const path = require("path");
 
 // path names
-global.readFilePath = "Z:\\BACKUPS\\Privé\\Data\\Google";
-global.writeFilePath = global.readFilePath+"_merged";
+global.readFilePath = process.env.READ_FILE_PATH;
+global.writeFilePath = global.readFilePath + "_merged";
 
 /**
  * Simple object check.
@@ -90,7 +91,7 @@ function CheckFolder(readFilePath, writeFilePath) {
           const writeFileJSON = JSON.parse(writeFile);
           const mergedJSON = mergeDeep(writeFileJSON, readFileJSON);
           fs.writeFileSync(writeFilePath, JSON.stringify(mergedJSON));
-        } catch (error) {}
+        } catch (error) { }
       }
     });
   }
